@@ -1,0 +1,7 @@
+<h1><%= @click.name %></h1>
+      <div class="d-flex justify-content-end" style=""><%= paginate @query, window: 0, outer_window: 3 %></div>
+
+<% @query.each do |job_latest| %>
+    <%= render partial: 'job', locals: {job_latest: job_latest} %>
+<% end %>
+      <div class="d-flex justify-content-end" style=""><%= paginate @query, window: 0, outer_window: 3 %></div>

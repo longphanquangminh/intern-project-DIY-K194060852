@@ -1,0 +1,16 @@
+<style>
+    .hrefbutton {
+        color: white;
+    }
+    .hrefbutton:hover {
+        color: white;
+    }
+</style>
+<button type="button" class="btn btn-labeled btn-primary">
+    
+    <% if user_signed_in? %>
+        <span class="btn-label"><i class="fa-solid fa-circle-plus fa-beat"></i></span><span style="margin-left: 10px;">APPLY</span>
+    <% else %>
+        <a class="hrefbutton" href="/login"><span class="btn-label"><i class="fa-solid fa-circle-plus fa-beat"></i></span><span style="margin-left: 10px;">APPLY</span></a>
+    <% end %>
+</button>

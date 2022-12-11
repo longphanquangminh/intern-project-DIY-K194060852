@@ -1,0 +1,44 @@
+<style>
+  
+@media only screen and (max-width:800px) {
+      .placeAndSalary2 {
+        display: block !important;
+      }
+
+      .placeAndSalary1 {
+        display: none !important;
+      }
+    }
+
+</style>
+  <div class="card border-primary mb-3">
+    <div class="card-body text-primary">
+        <div class="row">
+          <div class="col-md-9">
+          <h5 class="card-title">
+            <%= link_to job_detail_url(job_latest), :action => 'go' do %>
+              <%= job_latest.name %>
+            <% end %>
+          </h5>
+            <p style="white-space: pre-line; color: black"><%= raw(job_latest.description.to_s.truncate_words(250, separator: ' ', :omission => "... #{link_to '(Read more)', job_detail_url(job_latest)}")) %></p>
+            <div class="placeAndSalary1 d-flex justify-content-between">
+              <span style="text-align: left;" class="card-text">Địa điểm: <%= job_latest.city.country %>, <%= link_to search_jobs_in_city_path(job_latest.city), :action => 'go' do %><%= job_latest.city.name %><% end %><%= job_latest.company_district.nil? ? "" : ", " + job_latest.company_district %></span>
+              <span style="text-align: right; display: block" class="card-text">Mức lương: <%= job_latest.salary %></span>
+            </div>
+            <div class="placeAndSalary2" style="display: none">
+              <span class="card-text">Địa điểm: <%= job_latest.city.country %>, <%= job_latest.city.name %><%= job_latest.company_district.nil? ? "" : ", " + job_latest.company_district %></span>
+              <br>
+              <span class="card-text">Mức lương: <%= job_latest.salary %></span>
+            </div>
+              <br>
+          </div>
+          <% if !current_page? root_path %>
+            <div class="col-md-3 align-self-center">
+              <div class="d-flex justify-content-center">
+                  <%= render "shared/favorite_button", job_id: job_latest.id %>
+              </div>
+          </div>
+          <% end %>
+      </div>
+   </div>
+  </div>

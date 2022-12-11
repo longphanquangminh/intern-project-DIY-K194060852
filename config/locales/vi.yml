@@ -1,0 +1,18 @@
+vi:
+  hello: "Xin chào thế giới nhá!"
+  views:
+    pagination:
+      first: "« ĐẦU"
+      last: "CUỐI »"
+      previous: "‹ TRƯỚC"
+      next: "SAU ›"
+      truncate: "…"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Không tìm thấy %{entry_name}"
+          one: "Hiển thị <b>1</b> %{entry_name}"
+          other: "Hiển thị <b>tất cả %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Hiển thị %{entry_name} <b>%{first} - %{last}</b> trong tổng <b>%{total}</b>"

@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+  <% if Favorite.exists?(job_id: job_id, user_id: current_user.id) %>
+    <%= form_tag(job_favorites_path(job_id: job_id), remote: true) do %>
+      <%= render "shared/unfavorite_button", job_id: job_id %>
+    <% end %>
+  <% else %>
+    <%= form_tag(job_favorites_path(job_id: job_id), remote: true) do %>
+      <%= button_tag :submit, class: "btn btn-block btn-lg btn-outline-danger mt-2", id: "favorite-btn" do %>
+        <i class="fa fa-heart"></i> Favorite
+      <% end %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= button_to new_user_session_path, method: :get, class: "btn btn-block btn-lg btn-outline-danger mt-2" do %>
+    <i class="fa fa-heart"></i> Favorite
+  <% end %>
+<% end %>

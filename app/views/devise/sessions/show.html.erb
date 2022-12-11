@@ -1,0 +1,35 @@
+<%= form_for(resource, as: resource_name , url: user_update_profile_path(resource_name), html: {multipart: true, method: :post }, data: {turbo: false} ) do |f| %>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">1. Email</label>
+    <input disabled type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= current_user.email %>">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">2. Full name</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= current_user.full_name %>">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">3. My CV</label>
+    <input type="file" class="form-control custom-file-input" id="customFile" onChange="return validateFiles()">
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+<% end %>
+<script>
+  function validateFiles() {
+    // CV file select box, allowed format: doc, pdf, xls, xlsx, zip. Maxium size: 5MB
+
+    var fileInput = document.getElementById('customFile');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.doc|\.pdf|\.xls|\.xlsx|\.zip|\.rar|\.docx|\.7z)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('allowed format: doc, pdf, xls, xlsx, zip');
+        fileInput.value = '';
+        return false;
+    }else{
+        if (document.getElementById('customFile').files[0].size > 5*1024*1024){
+      alert("Maxium size: 5MB");
+      document.getElementById('customFile').value = '';
+      return false;
+      }
+    }
+  }
+</script>

@@ -1,0 +1,46 @@
+<div class="section-margin">
+    <h3>CITY LIST</h3>
+    <div class="row row-cols-1 row-cols-md-4 g-4 center text-center">
+    <% if @areas.any? %>
+      <% @areas.each do |city| %>
+        <a href="#<%= city.country %>-section">
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                  <h5 class="card-title"><%= city.country %></h5>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    <% else %>
+      <p>No areas found! Thank you!</p>
+    <% end %>
+  </div>
+</div>
+
+<div class="section-margin">
+  <h3 id="Vietnam-section">VIETNAM</h3>
+  <div class="row row-cols-1 row-cols-md-4 g-4 center text-center">
+    <% if @cities_vietnam.any? %>
+      <% @cities_vietnam.each do |city| %>
+        <%= render partial: 'city_item', locals: {city: city} %>
+      <% end %>
+    <% else %>
+      <p>No cities in Vietnam found! Thank you!</p>
+    <% end %>
+  </div>
+</div>
+
+<div class="section-margin">
+  <h3 id="International-section">INTERNATIONAL</h3>
+  <div class="row row-cols-1 row-cols-md-4 g-4 center text-center">
+    <% if @cities_notvietnam.any? %>
+      <% @cities_notvietnam.each do |city| %>
+        <%= render partial: 'city_item', locals: {city: city} %>
+      <% end %>
+    <% else %>
+      <p>No cities in International found! Thank you!</p>
+    <% end %>
+  </div>
+</div>

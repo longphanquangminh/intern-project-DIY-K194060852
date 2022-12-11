@@ -1,0 +1,43 @@
+<style>
+    span {
+        text-transform: uppercase;
+    }
+    textarea {
+        width: 100%;
+        /* height: auto; */
+        resize: none;
+        border: none;
+        overflow: hidden;
+    }
+</style>
+<div class="breadcrumb">
+    <a href="/">TOP</a>><%= link_to search_jobs_in_city_path(@job.city), :action => 'go' do %><%= @job.city.name %><% end %>><%= link_to search_jobs_in_industry_path(@job.industry), :action => 'go' do %><%= @job.industry.name %><% end %>><%= @job.name %>
+</div>
+<div>
+    <div class="">
+        <div class="row">
+            <div class="col-md-9 align-self-center mt-3">
+                Name: <%= @job.name %>
+            </div>
+            <div class="col-md-3 align-self-center mt-3">
+                <div class="d-flex justify-content-center">
+                    <%= render "shared/apply_button" %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <p>Company: <%= @job.company_name %></p>
+    <p>Location: <%= link_to search_jobs_in_city_path(@job.city), :action => 'go' do %><%= @job.city.name %><% end %></p>
+    <p>Salary: <%= @job.salary %></p>
+    <p>Description: </p>
+    <p style="white-space: pre-line; color: black; line-height: 1.8; text-align: justify"><%= @job.description %></p>
+</div>
+<div class="row">
+    <div class="col-md-6 d-flex justify-content-center mb-3">
+        <%= render "shared/apply_button" %>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center mb-3">
+        <%= render "shared/favorite_button", job_id: @job.id %>
+    </div>
+</div>

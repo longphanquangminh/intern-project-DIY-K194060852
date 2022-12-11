@@ -1,0 +1,12 @@
+<%= link_to search_jobs_in_city_path(SlugWork.new.slug_work(city.name)), :action => 'go' do %>
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><%= city.name %></h5>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Job count: <%= city.count_job_on_city %></small>
+            </div>
+        </div>
+    </div>
+<% end %>

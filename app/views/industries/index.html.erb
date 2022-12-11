@@ -1,0 +1,23 @@
+<div class="section-margin">
+  <h3>INDUSTRY LIST</h3>
+  <div class="row row-cols-1 row-cols-md-4 g-4 center text-center">
+    <% if @query_industries.any? %>
+      <% @query_industries.each do |industry| %>
+        <%= link_to search_jobs_in_industry_path(SlugWork.new.slug_work(industry.name)), :action => 'go' do %>
+          <div class="col">
+              <div class="card h-100">
+                  <div class="card-body">
+                      <h5 class="card-title"><%= industry.name %></h5>
+                  </div>
+                  <div class="card-footer">
+                      <small class="text-muted">Job count: <%= industry.count_job_on_industry %></small>
+                  </div>
+              </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>No industries found! Thank you!</p>
+    <% end %>
+  </div>
+</div>

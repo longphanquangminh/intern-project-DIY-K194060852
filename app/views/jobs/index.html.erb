@@ -1,0 +1,139 @@
+<style>
+    .col-margin{
+        margin: auto;
+    }
+    a {
+        text-decoration: none;
+    }
+    .row-header {
+        height: 50px;
+    }
+    .link-header {
+      color: white;
+    }
+    textarea:focus {
+    outline: none;
+    }
+
+    @media only screen and (max-width:800px) {
+      .searchInfoOnMobile {
+        display: block !important;
+      }
+
+      .searchInfoOnComputer {
+        display: none !important;
+      }
+    }
+
+</style>
+
+<% unless request.path == '/' %>
+  <div>
+    <% if @jobs_search.any? %>
+      <% unless @params_var.nil? %>
+        <div class="searchInfoOnComputer" style="margin-bottom:20px;">
+          <span style="margin-left: 20px;">Total: <%= @total_search %></span><span style="margin-left: 39px;">Result for: <%= @params_var %></span><span style="margin-left: 39px;">Page: <%= params[:page].nil? ? 1 : params[:page] %> </span>
+        </div>
+        <div class="searchInfoOnMobile" style="margin-bottom:20px; display: none; margin-left: 20px;">
+          <p>Total: <%= @total_search %></p>
+          <p>Result for: <%= @params_var %></p>
+          <p>Page: <%= params[:page].nil? ? 1 : params[:page] %></p>
+        </div>
+      <% end %>
+      <div class="d-flex justify-content-end" style=""><%= paginate @query.results, window: 0, outer_window: 3, params: { script_name: "/jobs" } unless @params_var.nil? %></div>
+      <div>
+        <% @jobs_search.each do |job_latest| %>
+          <%= render partial: 'job', locals: {job_latest: job_latest} %>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-end" style=""><%= paginate @query.results, window: 0, outer_window: 3, params: { script_name: "/jobs" } unless @params_var.nil? %></div>
+    <% else %>
+      <p class="text-center">No jobs found! Thank you!</p>
+    <% end %>
+  </div>
+<% end %>
+
+<% if !request.path.start_with?('/jobs') %>
+<div id="jobs_index">
+    <h3>LATEST JOBS</h3>
+    <% if @jobs_latest.any? %>
+      <% @jobs_latest.each do |job_latest| %>
+        <%= render partial: 'job', locals: {job_latest: job_latest} %>
+      <% end %>
+    <% else %>
+      <p>No jobs found! Thank you!</p>
+    <% end %>
+</div>
+
+<br>
+<br>
+
+<div>
+  <h3>TOP CITIES</h3>
+  <div class="row row-cols-1 row-cols-md-3 g-4 center text-center">
+    <% if @cities_top.any? %>
+      <% @cities_top.each do |city_top| %>
+        <%= link_to search_jobs_in_city_path(SlugWork.new.slug_work(city_top.name)), :action => 'go' do %>
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><%= city_top.name %></h5>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Job count: <%= city_top.job_count %></small>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>No cities found! Thank you!</p>
+    <% end %>
+  </div>
+  <br>
+  <a href="/cities">
+  <div class="d-flex justify-content-end">
+    <div class="card border-primary mb-3 center text-center">
+      <div class="card-body text-primary">
+        <h5 class="card-title">ALL CITIES</h5>
+      </div>
+  </div>
+  </div>
+  </a>
+</div>
+  
+
+<div>
+  <h3>TOP INDUSTRIES</h3>
+  <div class="row row-cols-1 row-cols-md-3 g-4 center text-center">
+    <% if @industries_top.any? %>
+      <% @industries_top.each do |industry_top| %>
+        <%= link_to search_jobs_in_industry_path(SlugWork.new.slug_work(industry_top.name)), :action => 'go' do %>
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><%= industry_top.name %></h5>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Job count: <%= industry_top.job_count %></small>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>No industries found! Thank you!</p>
+    <% end %>
+  </div>
+  <br>
+  <a href="/industries">
+    <div class="d-flex justify-content-end">
+      <div class="card border-primary mb-3 center text-center">
+        <div class="card-body text-primary">
+          <h5 class="card-title">ALL INDUSTRIES</h5>
+        </div>
+      </div>
+  </div>
+  </a>
+</div>
+<% end %>
