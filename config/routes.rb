@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     get     '/my' , to: 'users#edit', as: 'user_profile'
     get     '/my/info', to: 'users#edit', as: 'user_edit_profile'
     post    '/my' , to: 'users#update', as: 'user_update_profile'
+    get     '/my/jobs', to: 'applies#index'
   end
 
   as :admin do

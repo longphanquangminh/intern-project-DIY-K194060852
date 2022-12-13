@@ -1,3 +1,5 @@
-<button type="button" class="btn btn-labeled btn-warning">
+<%= form_tag(job_favorite_path(job_id: job_id, id: favorited_job.id), method: :delete, remote: true) do  %>
+  <%= button_tag :submit, class: "btn btn-block btn-lg btn-danger mt-2" do %>
     <span class="btn-label"><i class="fa-solid fa-skull-crossbones fa-fade"></i></span><span style="margin-left: 10px;">REMOVEFV</span>
-</button>
+  <% end %>
+<% end %>

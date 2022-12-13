@@ -10,7 +10,7 @@ class UsersController < DeviseController
         @user = User.find(current_user.id)
         @user.update(user_params)
         if @user.save
-            flash[:notice] = 'You have successfully updated the user'
+            flash[:notice] = 'You have successfully updated your account info'
             render :edit
         else
             flash.now[:notice] = 'There is an error in your form'
