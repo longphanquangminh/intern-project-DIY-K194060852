@@ -96,13 +96,13 @@ namespace :importwork do
     ## Do Solr for cities
     a_cities = []
     all_city = City.all
-    all_city.each do |item|
+    all_city.each do |item_city|
       kq = Job.search do
-        fulltext item.name
+        fulltext "\"#{item_city.name}\""
       end
 
-      item.job_count = kq.total
-      a_cities << item
+      item_city.job_count = kq.total
+      a_cities << item_city
       
     end
 
@@ -111,13 +111,13 @@ namespace :importwork do
     ## Do Solr for industries
     a_industries = []
     all_industries = Industry.all
-    all_industries.each do |item|
+    all_industries.each do |item_industry|
       kq = Job.search do
-        fulltext "#{item.name}"
+        fulltext "\"#{item_industry.name}\""
       end
 
-      item.job_count = kq.total
-      a_industries << item
+      item_industry.job_count = kq.total
+      a_industries << item_industry
 
     end
 
